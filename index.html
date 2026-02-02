@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE MORE MOVE - Strategic Puzzle Game</title>
+    <meta name="description" content="A minimalist strategy game about perfect decisions. Every move matters. Can you find the optimal path?">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">ONE MORE MOVE</h1>
+            <p class="subtitle">Find the perfect path through strategic decisions</p>
+        </div>
+        
+        <!-- Difficulty Selection -->
+        <div class="difficulty-section">
+            <div class="difficulty-label">Select Difficulty</div>
+            <div class="difficulty-buttons">
+                <button class="diff-btn" data-difficulty="easy" onclick="selectDifficulty('easy')">
+                    <span class="diff-name">EASY</span>
+                    <span class="diff-info">30 win paths</span>
+                </button>
+                <button class="diff-btn active" data-difficulty="medium" onclick="selectDifficulty('medium')">
+                    <span class="diff-name">MEDIUM</span>
+                    <span class="diff-info">20 win paths</span>
+                </button>
+                <button class="diff-btn" data-difficulty="hard" onclick="selectDifficulty('hard')">
+                    <span class="diff-name">HARD</span>
+                    <span class="diff-info">5 win paths</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label">Score</div>
+                <div class="stat-value score-display" id="scoreDisplay">100</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Moves Left</div>
+                <div class="stat-value" id="movesDisplay">10</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Move #</div>
+                <div class="stat-value" id="moveNumberDisplay">0</div>
+            </div>
+        </div>
+        
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="grid-container" id="gameGrid"></div>
+            
+            <div class="controls-section">
+                <div class="arrow-grid">
+                    <button class="arrow-btn up" id="upBtn" onclick="makeMove('up')">↑</button>
+                    <button class="arrow-btn left" id="leftBtn" onclick="makeMove('left')">←</button>
+                    <button class="arrow-btn down" id="downBtn" onclick="makeMove('down')">↓</button>
+                    <button class="arrow-btn right" id="rightBtn" onclick="makeMove('right')">→</button>
+                </div>
+                <div class="keyboard-hint">Use arrow keys or WASD to move</div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="newGame()">New Game</button>
+            <button class="btn btn-primary" id="endBtn" onclick="endGameManually()" style="display: none;">End Game</button>
+        </div>
+    </div>
+    
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Game Over</h2>
+                <p class="modal-subtitle">Performance Analysis</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-label">Your Score</div>
+                    <div class="result-value your-score" id="finalScoreDisplay">0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Optimal Score</div>
+                    <div class="result-value optimal-score" id="optimalScoreDisplay">0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Difference</div>
+                    <div class="result-value gap-score" id="gapScoreDisplay">0</div>
+                </div>
+            </div>
+            
+            <div class="analysis-box" id="analysisBox">
+                <p class="analysis-text" id="analysisText"></p>
+            </div>
+            
+            <div class="share-section">
+                <div class="share-content" id="shareContent"></div>
+                <button class="copy-button" onclick="copyShareText()">📋 Copy Results to Share</button>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="replayBtn" onclick="replayGame()" style="display: none;">Replay from Move #<span id="replayMoveNum">0</span></button>
+                <button class="btn btn-secondary" onclick="closeResultsModal(); newGame();">New Game</button>
+                <button class="btn btn-secondary" onclick="closeResultsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
